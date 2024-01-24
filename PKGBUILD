@@ -1,5 +1,5 @@
 # Maintainer: Kimiblock Moe
-
+_name="Amulet-LevelDB"
 pkgname=python-amulet-leveldb-git
 pkgdesc="A Cython wrapper for Mojang's modified LevelDB library."
 url="https://github.com/Amulet-Team/Amulet-LevelDB"
@@ -18,22 +18,22 @@ md5sums=(
 provides=(python-amulet-leveldb-git python-amulet-leveldb)
 
 function pkgver() {
-	cd "${srcdir}/Amulet-LevelDB"
+	cd "${srcdir}/${_name}"
 	printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 }
 
 function prepare() {
-	cd "${srcdir}/Amulet-LevelDB"
+	cd "${srcdir}/${_name}"
 	git submodule init
 	git submodule update
 }
 
 function build() {
-	cd "${srcdir}/Amulet-LevelDB"
+	cd "${srcdir}/${_name}"
 	python setup.py build
 }
 
 function package() {
-	cd "${srcdir}/Amulet-LevelDB"
+	cd "${srcdir}/${_name}"
 	python setup.py install --root="$pkgdir" --optimize=1
 }
